@@ -30,6 +30,7 @@ Article.prototype.toHtml = function() {
   $newArticle.find('.byline a').attr('href', this.authorUrl);
 
   // SHIT GOES HERE, HANNAH!
+  $newArticle.find('.article-body').html(this.body);
 
   // Include the publication date as a 'title' attribute to show on hover:
   $newArticle.find('time[pubdate]').attr('title', this.publishedOn)
@@ -40,6 +41,8 @@ Article.prototype.toHtml = function() {
   $newArticle.append('<hr>');
 
   // TODO: This cloned article is no longer a template, so we should remove that class...
+
+  $newArticle.removeClass('template');
 
   return $newArticle;
 }
