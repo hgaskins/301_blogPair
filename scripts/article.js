@@ -1,17 +1,17 @@
 var articles = [];
 
-function Article (opts) {
-  this.author = opts.author;
-  this.authorUrl = opts.authorUrl;
-  this.title = opts.title;
-  this.category = opts.category;
-  this.body = opts.body;
-  this.publishedOn = opts.publishedOn;
-}
+// function Article (opts) {
+//   this.author = opts.author;
+//   this.authorUrl = opts.authorUrl;
+//   this.title = opts.title;
+//   this.category = opts.category;
+//   this.body = opts.body;
+//   this.publishedOn = opts.publishedOn;
+// }
 
-// function Neighborhood (opts) {
-//   for (key in opts) this[key] = opts[key];
-// };
+function Article (opts) {
+  for (key in opts) this[key] = opts[key];
+};
 
 Article.prototype.toHtml = function() {
   // DONE: Use handlebars to render your articles.
