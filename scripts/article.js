@@ -9,10 +9,18 @@ function Article (opts) {
   this.publishedOn = opts.publishedOn;
 }
 
+// function Neighborhood (opts) {
+//   for (key in opts) this[key] = opts[key];
+// };
+
 Article.prototype.toHtml = function() {
-  // TODO: Use handlebars to render your articles.
+  // DONE: Use handlebars to render your articles.
   //       - Get your template from the DOM.
   //       - Now "compile" your template with Handlebars.
+
+  var source = $('#blogPairTemplate').html();
+  var template = Handlebars.compile(source);
+  return template(this);
 
   // DONE: If your template will use properties that aren't on the object yet, add them.
   //   Since your template can't hold any JS logic, we need to execute the logic here.
