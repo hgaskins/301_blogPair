@@ -74,25 +74,55 @@ articleView.initNewArticlePage = function() {
     // TODO: ADD IN HIGHLIGHT WHEN WE FIND JSON THING
   });
 
-  // TODO: Add an event handler to update the preview and the export field if any inputs change.
-  var myObj = {};
+  // DONE: Add an event handler to update the preview and the export field if any inputs change.
+  myObj = {};
   var articleTitle;
   var articleCategory;
   var articleAuthor;
+  var articleAuthorURL;
+  var articleBody;
+  exportField = $('#export-field');
 
   $('#article-title').keydown(function() {
     articleTitle = $('#article-title').val();
     myObj.title = articleTitle;
-    $('#export-field').prepend(articleTitle);
+    exportField.text(JSON.stringify(myObj));
+    // $('#export-field').prepend(articleTitle);
     console.log(myObj);
   });
 
   $('#article-category').keydown(function() {
     articleCategory = $('#article-category').val();
     myObj.category = articleCategory;
-    $('#export-field').prepend(articleCategory);
+    exportField.text(JSON.stringify(myObj));
+    // $('#export-field').prepend(articleCategory);
     console.log(myObj);
   });
+
+  $('#article-author').keydown(function() {
+    articleAuthor = $('#article-author').val();
+    myObj.author = articleAuthor;
+    exportField.text(JSON.stringify(myObj));
+    // $('#export-field').prepend(articleAuthor);
+    console.log(myObj);
+  });
+
+  $('#article-author-url').keydown(function() {
+    articleAuthorURL = $('#article-author-url').val();
+    myObj.authorUrl = articleAuthorURL;
+    exportField.text(JSON.stringify(myObj));
+    // $('#export-field').prepend(articleAuthorURL);
+    console.log(myObj);
+  });
+
+  $('#article-body').keydown(function() {
+    articleBody = $('#article-body').val();
+    myObj.body = articleBody;
+    exportField.text(JSON.stringify(myObj));
+    // $('#export-field').prepend(articleBody);
+    console.log(myObj);
+  });
+
 
 
 
