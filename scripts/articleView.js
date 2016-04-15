@@ -75,11 +75,34 @@ articleView.initNewArticlePage = function() {
   });
 
   // TODO: Add an event handler to update the preview and the export field if any inputs change.
+  var myObj = {};
+  var articleTitle;
+  var articleCategory;
+  var articleAuthor;
+
+  $('#article-title').keydown(function() {
+    articleTitle = $('#article-title').val();
+    myObj.title = articleTitle;
+    $('#export-field').prepend(articleTitle);
+    console.log(myObj);
+  });
+
+  $('#article-category').keydown(function() {
+    articleCategory = $('#article-category').val();
+    myObj.category = articleCategory;
+    $('#export-field').prepend(articleCategory);
+    console.log(myObj);
+  });
+
+
+
 };
+
 
 articleView.create = function() {
   // TODO: Set up a var to hold the new article we are creating.
   // Clear out the #articles element, so we can put in the updated preview
+  $('#articles').empty();
 
   // TODO: Instantiate an article based on what's in the form fields:
 
