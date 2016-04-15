@@ -161,7 +161,9 @@ articleView.create = function() {
   }
 
   // TODO: Activate the highlighting of any code blocks:
-
+  $('.article-body').filter('pre').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
   // TODO: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
 
 };
