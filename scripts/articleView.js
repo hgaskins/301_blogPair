@@ -62,16 +62,17 @@ articleView.setTeasers = function() {
   });
 };
 
+
+
 articleView.initNewArticlePage = function() {
   // DONE: Ensure the main .tab-content area is revealed. We might add more tabs later.
   $('.tab-content').show();
-  // TODO: The new articles we create will be copy/pasted into our source data file.
+  // DONE: The new articles we create will be copy/pasted into our source data file.
   // Set up this "export" functionality. We can hide it for now, and show it once we
   // have data to export. Also, let's add focus event to help us select the JSON.
 
   $('#new-form').keypress(function() {
     $('#export-field').css('display', 'block');
-    // TODO: ADD IN HIGHLIGHT WHEN WE FIND JSON THING
   });
 
   // DONE: Add an event handler to update the preview and the export field if any inputs change.
@@ -81,12 +82,16 @@ articleView.initNewArticlePage = function() {
   var articleAuthor;
   var articleAuthorURL;
   var articleBody;
-  exportField = $('#export-field');
+  exportField = $('#article-json');
+
+  function updateExport() {
+    exportField.val(JSON.stringify(myObj));
+  }
 
   $('#article-title').keydown(function() {
     articleTitle = $('#article-title').val();
     myObj.title = articleTitle;
-    exportField.text(JSON.stringify(myObj));
+    updateExport();
     // $('#export-field').prepend(articleTitle);
     console.log(myObj);
   });
@@ -94,7 +99,7 @@ articleView.initNewArticlePage = function() {
   $('#article-category').keydown(function() {
     articleCategory = $('#article-category').val();
     myObj.category = articleCategory;
-    exportField.text(JSON.stringify(myObj));
+    updateExport();
     // $('#export-field').prepend(articleCategory);
     console.log(myObj);
   });
@@ -102,7 +107,7 @@ articleView.initNewArticlePage = function() {
   $('#article-author').keydown(function() {
     articleAuthor = $('#article-author').val();
     myObj.author = articleAuthor;
-    exportField.text(JSON.stringify(myObj));
+    updateExport();
     // $('#export-field').prepend(articleAuthor);
     console.log(myObj);
   });
@@ -110,7 +115,7 @@ articleView.initNewArticlePage = function() {
   $('#article-author-url').keydown(function() {
     articleAuthorURL = $('#article-author-url').val();
     myObj.authorUrl = articleAuthorURL;
-    exportField.text(JSON.stringify(myObj));
+    updateExport();
     // $('#export-field').prepend(articleAuthorURL);
     console.log(myObj);
   });
@@ -118,15 +123,19 @@ articleView.initNewArticlePage = function() {
   $('#article-body').keydown(function() {
     articleBody = $('#article-body').val();
     myObj.body = articleBody;
-    exportField.text(JSON.stringify(myObj));
+    updateExport();
     // $('#export-field').prepend(articleBody);
     console.log(myObj);
   });
 
 
 
-
 };
+
+//to highlight #article-json section for copy paste
+$('#article-json').on('focus', function() {
+  $(this).select();
+});
 
 
 articleView.create = function() {
