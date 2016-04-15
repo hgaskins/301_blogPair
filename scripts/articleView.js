@@ -160,12 +160,12 @@ articleView.create = function() {
     console.log('body does not exist yet');
   }
 
-  // TODO: Activate the highlighting of any code blocks:
-  $('.article-body').filter('pre').each(function(i, block) {
+  // DONE: Activate the highlighting of any code blocks:
+  $('#articles').find('pre').each(function(i, block) {
     hljs.highlightBlock(block);
   });
-  // TODO: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
-
+  // DONE: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
+  // See line 88
 };
 
 
