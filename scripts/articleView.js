@@ -63,6 +63,7 @@ articleView.setTeasers = function() {
 };
 
 
+myObj = {};
 
 articleView.initNewArticlePage = function() {
   // DONE: Ensure the main .tab-content area is revealed. We might add more tabs later.
@@ -76,7 +77,7 @@ articleView.initNewArticlePage = function() {
   });
 
   // DONE: Add an event handler to update the preview and the export field if any inputs change.
-  myObj = {};
+
   var articleTitle;
   var articleCategory;
   var articleAuthor;
@@ -86,7 +87,10 @@ articleView.initNewArticlePage = function() {
 
   function updateExport() {
     exportField.val(JSON.stringify(myObj));
+    articleView.create();
   }
+
+
 
   $('#article-title').keydown(function() {
     articleTitle = $('#article-title').val();
@@ -139,17 +143,27 @@ $('#article-json').on('focus', function() {
 
 
 articleView.create = function() {
-  // TODO: Set up a var to hold the new article we are creating.
+  // DONE: Set up a var to hold the new article we are creating.
   // Clear out the #articles element, so we can put in the updated preview
   $('#articles').empty();
 
-  // TODO: Instantiate an article based on what's in the form fields:
 
-  // TODO: Use our interface to the Handblebars template to put this new article into the DOM:
+  // DONE: Instantiate an article based on what's in the form fields:
+  var newArticle = new Article(myObj);
+
+
+  // DONE: Use our interface to the Handblebars template to put this new article into the DOM:
+  if (typeof newArticle.body !== 'undefined') {
+    $('#articles').append(newArticle.toHtml());
+    console.log('the body exists');
+  } else {
+    console.log('body does not exist yet');
+  }
 
   // TODO: Activate the highlighting of any code blocks:
 
   // TODO: Export the new article as JSON, so it's ready to copy/paste into blogArticles.js:
+
 };
 
 
@@ -159,4 +173,5 @@ articleView.initIndexPage = function() {
   articleView.handleAuthorFilter();
   articleView.handleMainNav();
   articleView.setTeasers();
+  articleView.create();
 };
