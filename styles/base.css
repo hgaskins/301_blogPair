@@ -78,7 +78,3 @@ input:invalid, textarea:invalid {
 input:valid, textarea:valid {
   border-color: #89CB8E;
 }
-
-#export-field {
-  display: none;
-}
