@@ -41,7 +41,8 @@ Article.loadAll = function(rawData) {
   });
 };
 
-var getJasonData;
+//declaring variable outside of fetchAll to avoid scope issues
+
 
 // This function will retrieve the data from either a local or remote source,
 // and process it, then hand off control to the View.
@@ -57,21 +58,16 @@ Article.fetchAll = function() {
     );
     articleView.initIndexPage(); //DONE: Change this fake method call to the correct one that will render the index page.
   } else {
-    var getJasonData = $.getJSON('../data/ipsumArticles.json', function(){
-      console.log('hello');
-    });
-    getJasonData.loadAll;
-
-    // TODO: When we don't already have the rawData in local storage, we need to get it from the JSON file,
-    //       which simulates data on a remote server. Run live-server or pushstate-server!
-    //       Please do NOT browse to your HTML file(s) using a "file:///" link. RUN A SERVER INSTEAD!!
-
     // 1. Retrieve the JSON file from the server with AJAX (which jQuery method is best for this?),
+    var getJasonData = $.getJSON('../data/ipsumArticles.json');
 
-    // 2. Store the resulting JSON data with the .loadAll method,
-
-    // 3. Cache the data in localStorage so next time we won't enter this "else" block (avoids hitting the server),
-
-    // 4. Render the index page (perhaps with an articleView method?).
+    getJasonData.done(function (data) {
+      // 2. Store the resulting JSON data with the .loadAll method,
+      Article.loadAll(data);
+      // 3. Cache the data in localStorage so next time we won't enter this "else" block (avoids hitting the server),
+      localStorage.rawData = JSON.stringify(data);
+      // 4. Render the index page (perhaps with an articleView method?).
+      articleView.initIndexPage();
+    });    
   }
 };
