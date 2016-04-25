@@ -13,3 +13,6 @@
 
   module.articlesController = articlesController;
 })(window);
+
+Article.createTable();
+Article.fetchAll(articleView.initIndexPage);
