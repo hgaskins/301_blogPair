@@ -9,7 +9,7 @@
     Article.fetchAll(articleView.initIndexPage);
     // DONE: Hide the main section elements; reveal the #articles section:
     $('main > section').hide();
-    $('#about').show();
+    $('#articles').show();
 
   };
 
