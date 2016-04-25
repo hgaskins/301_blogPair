@@ -48,11 +48,6 @@
     });
   };
 
-  // Done: Once your code that uses page.js to properly map "/" and "/about" routes,
-  //       delete articleView.handleMainNav(). Say "bye" to click handlers in this app!
-  // Done: Remove all calls to this function, in all files for this app.
-
-
   articleView.setTeasers = function() {
     $('.article-body *:nth-of-type(n+2)').hide();
 
