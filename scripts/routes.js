@@ -1,13 +1,15 @@
-// TODO: Configure our two routes for this app with page.js, by registering each URL your app can handle,
+// DONE: Configure our two routes for this app with page.js, by registering each URL your app can handle,
 // linked to a a single controller function to handle it:
 
 // page(...
+
+
 page.base('/');
-page('index', articlesController);
-page('about', aboutController);
+page('', articlesController.index);
+page('about', aboutController.index);
 page(); //call page to start
 
-// TODO: What function do we call to activate page.js? Call it to run that code right here.
+// DONE: What function do we call to activate page.js? Call it to run that code right here.
 
 // If you did the prework for today, you should be able to refer to your sandbox app for these TODOs.
 
