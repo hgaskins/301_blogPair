@@ -7,16 +7,6 @@
 
   Article.all = [];
 
-  Article.prototype.toHtml = function() {
-    var template = Handlebars.compile($('#article-template').text());
-
-    this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
-    this.publishStatus = this.publishedOn ? 'published ' + this.daysAgo + ' days ago' : '(draft)';
-    this.body = marked(this.body);
-
-    return template(this);
-  };
-
   Article.createTable = function(callback) {
     webDB.execute(
       'CREATE TABLE IF NOT EXISTS articles (' +
@@ -27,10 +17,7 @@
         'category VARCHAR(20), ' +
         'publishedOn DATETIME, ' +
         'body TEXT NOT NULL);',
-      function(result) {
-        console.log('Successfully set up the articles table.', result);
-        if (callback) callback();
-      }
+      callback
     );
   };
 
@@ -83,11 +70,11 @@
     });
   };
 
-  Article.fetchAll = function(next) {
+  Article.fetchAll = function(callback) {
     webDB.execute('SELECT * FROM articles ORDER BY publishedOn DESC', function(rows) {
       if (rows.length) {
         Article.loadAll(rows);
-        next();
+        callback();
       } else {
         $.getJSON('/data/hackerIpsum.json', function(rawData) {
           // Cache the json, so we don't need to request it next time:
@@ -97,13 +84,26 @@
           });
           webDB.execute('SELECT * FROM articles', function(rows) {
             Article.loadAll(rows);
-            next();
+            callback();
           });
         });
       }
     });
   };
 
+  Article.findWhere = function(field, value, callback) {
+    webDB.execute(
+      [
+        {
+          sql: 'SELECT * FROM articles WHERE ' + field + ' = ?;',
+          data: [value]
+        }
+      ],
+      callback
+    );
+  };
+
+  // DONE: Example of synchronous, FP approach to getting unique data
   Article.allAuthors = function() {
     return Article.all.map(function(article) {
       return article.author;
@@ -114,6 +114,11 @@
       }
       return names;
     }, []);
+  };
+
+  // DONE: Example of async, SQL-based approach to getting unique data
+  Article.allCategories = function(callback) {
+    webDB.execute('SELECT DISTINCT category FROM articles;', callback);
   };
 
   Article.numWordsAll = function() {
@@ -145,7 +150,7 @@
   Article.stats = function() {
     return {
       numArticles: Article.all.length,
-      numWords: Article.numwordsAll(),
+      numWords: Article.numwords(),
       Authors: Article.allAuthors(),
     };
   };

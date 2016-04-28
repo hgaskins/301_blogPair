@@ -1,14 +1,23 @@
+page('/',
+  articlesController.loadAll,
+  articlesController.index);
 
-(function(module) {
-  var routes = {};
-  routes.setMapping = function() {
-    page.base('/');
+page('/about', aboutController.index);
 
-    page('', articlesController.index);
-    page('about', aboutController.index);
+page('/article/:id',
+  articlesController.loadById,
+  articlesController.index);
 
-    page();
-  };
-  routes.setMapping();
-  module.routes = routes;
-})(window);
+// Redirect home if the default filter option is selected:
+page('/category', '/');
+page('/author', '/');
+
+page('/author/:authorName',
+  articlesController.loadByAuthor,
+  articlesController.index);
+
+page('/category/:categoryName',
+  articlesController.loadByCategory,
+  articlesController.index);
+
+page();
