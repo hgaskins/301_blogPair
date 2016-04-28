@@ -30,7 +30,7 @@ data, in this case the repos object.
         //If no callbacks run, why not?
         //the ajax call failed.
         //If one runs, which one runs, and what determines that?
-        //If just one runs, it is the first, and the second one only runs if the first completes properly. If the first callback fails, the second one will not run.
+        //If just one runs, it is the first, and the second one only runs if the first completes properly. If the first callback fails, the second one will not run. 🏃
         //If both callbacks run, what order do they run in? Does that order ever change - if so, under what conditions?
         //They are run in the order that they are chained together. Dpenedent on the success of the previous callback.
     .done(function(data, message, xhr) { repos.all = data; })
@@ -51,5 +51,5 @@ data, in this case the repos object.
   };
   //This makes the repos object available to the window scope.
   module.repos = repos;
-//This specificies the scope that module is exposed to. Modeule.repo is available to window. 
+//This specificies the scope that module is exposed to. Modeule.repo is available to window.
 })(window);

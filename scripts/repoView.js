@@ -1,3 +1,4 @@
+//another IIFE, see repo.js for further explaination.
 (function(module) {
   // defines the repoView object.
   var repoView = {};
@@ -38,5 +39,6 @@
     );
   };
 
+  //another IIFE, see repo.js for further explaination. 🙏
   module.repoView = repoView;
 })(window);
